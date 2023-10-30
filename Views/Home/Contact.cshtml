@@ -1,0 +1,83 @@
+﻿@model CareerConnect.Models.tbl_contact
+@{
+    ViewBag.Title = "Contact";
+}
+
+<h2 style="text-align: center; color: darkcyan">Contact Us</h2>
+<style>
+    .error {
+        color: red;
+        font-weight: bolder;
+    }
+
+    .form-group {
+        margin: 1rem;
+    }
+
+    label {
+        margin: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        border: 2px solid lightblue;
+    }
+
+    #formtag {
+        border: 2px solid lightblue;
+        border-radius: 1rem
+    }
+</style>
+<div class="formtag">
+
+    @using (Html.BeginForm("AddContact", "Home", FormMethod.Post, new { @id = "formtag" }))
+    {
+
+        <div class="form-group">
+            <label>Name <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "error" })
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "John Doe" })
+        </div>
+        <div class="form-group">
+            <label>Email <span style="color:red;font-weight:bold">*</span></label>
+            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "error" })
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "johndoe@gmail.com" })
+        </div>
+        <div class="form-group">
+            <label>Phone Number <span style="color:red;font-weight:bold">*</span></label>
+            @Html.ValidationMessageFor(x => x.Mobile, "", new { @class = "error" })
+            @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", @placeholder = "+91 7878992001" })
+        </div>
+        <div class="form-group">
+            <label>Message <span style="color:red;font-weight:bold">*</span></label>
+            @Html.ValidationMessageFor(x => x.Message, "", new { @class = "error" })
+            @Html.TextBoxFor(x => x.Message, new { @class = "form-control", @placeholder = "Type Here..." })
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+    }
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("button[type='submit']").prop('disabled', true);
+
+        $("input[type='text']").on('input', function () {
+            var allFieldsFilled = true;
+            $("input[type='text']").each(function () {
+                if ($(this).val() === '') {
+                    allFieldsFilled = false;
+                    return false; 
+                }
+            });
+
+            
+            $("button[type='submit']").prop('disabled', !allFieldsFilled);
+        });
+    });
+</script>
+

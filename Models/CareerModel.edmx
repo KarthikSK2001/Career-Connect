@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="db_careerhuntModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_college_events">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IWinner" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IAbout" Type="varchar(max)" Nullable="false" />
+          <Property Name="ITech" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ILink" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_colleges_profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColName" Type="varchar" MaxLength="50" />
+          <Property Name="ColEmail" Type="varchar" MaxLength="50" />
+          <Property Name="ColAbout" Type="varchar(max)" />
+          <Property Name="ColLocation" Type="varchar" MaxLength="50" />
+          <Property Name="ColURL" Type="varchar(max)" />
+          <Property Name="ColImage" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_employer_profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CBio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CLocation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CIndustry" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CImage" Type="varbinary(max)" Nullable="false" />
+          <Property Name="CSocialMedia" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_job_posts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CMRole" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CMName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CMLocation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CMMode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CMPay" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CMLink" Type="varchar(max)" Nullable="false" />
+          <Property Name="CMImage" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_jobseekers_profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Profession" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Education" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Skills" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SocialMedia" Type="varchar(max)" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+          <Property Name="IsProfileCreated" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_userRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_userRole_tbl_users">
+          <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="1" />
+          <End Role="tbl_userRole" Type="Self.tbl_userRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tbl_userRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_careerhuntModelStoreContainer">
+          <EntitySet Name="tbl_college_events" EntityType="Self.tbl_college_events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_colleges_profile" EntityType="Self.tbl_colleges_profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_contact" EntityType="Self.tbl_contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_employer_profile" EntityType="Self.tbl_employer_profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_job_posts" EntityType="Self.tbl_job_posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_jobseekers_profile" EntityType="Self.tbl_jobseekers_profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_userRole" EntityType="Self.tbl_userRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_userRole_tbl_users" Association="Self.FK_tbl_userRole_tbl_users">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_userRole" EntitySet="tbl_userRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_careerhuntModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="db_careerhuntEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_contact" EntityType="Self.tbl_contact" />
+          <EntitySet Name="tbl_jobseekers_profile" EntityType="db_careerhuntModel.tbl_jobseekers_profile" />
+          <EntitySet Name="tbl_employer_profile" EntityType="db_careerhuntModel.tbl_employer_profile" />
+          <EntitySet Name="tbl_job_posts" EntityType="db_careerhuntModel.tbl_job_posts" />
+          <EntitySet Name="tbl_colleges_profile" EntityType="db_careerhuntModel.tbl_colleges_profile" />
+          <EntitySet Name="tbl_college_events" EntityType="db_careerhuntModel.tbl_college_events" />
+          <EntitySet Name="tbl_users" EntityType="db_careerhuntModel.tbl_users" />
+          <EntitySet Name="tbl_userRole" EntityType="db_careerhuntModel.tbl_userRole" />
+          <AssociationSet Name="FK_tbl_userRole_tbl_users" Association="db_careerhuntModel.FK_tbl_userRole_tbl_users">
+            <End Role="tbl_users" EntitySet="tbl_users" />
+            <End Role="tbl_userRole" EntitySet="tbl_userRole" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_jobseekers_profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Profession" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Education" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Skills" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SocialMedia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsProfileCreated" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_employer_profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CBio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CLocation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CIndustry" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CImage" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="CSocialMedia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_job_posts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CMRole" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CMName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CMLocation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CMMode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CMPay" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CMLink" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CMImage" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_colleges_profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ColEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ColAbout" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ColLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ColURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ColImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_college_events">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IWinner" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IAbout" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ITech" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ILink" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_userRole" Relationship="db_careerhuntModel.FK_tbl_userRole_tbl_users" FromRole="tbl_users" ToRole="tbl_userRole" />
+        </EntityType>
+        <EntityType Name="tbl_userRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_users" Relationship="db_careerhuntModel.FK_tbl_userRole_tbl_users" FromRole="tbl_userRole" ToRole="tbl_users" />
+        </EntityType>
+        <Association Name="FK_tbl_userRole_tbl_users">
+          <End Type="db_careerhuntModel.tbl_users" Role="tbl_users" Multiplicity="1" />
+          <End Type="db_careerhuntModel.tbl_userRole" Role="tbl_userRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tbl_userRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_careerhuntModelStoreContainer" CdmEntityContainer="db_careerhuntEntities">
+          <EntitySetMapping Name="tbl_contact">
+            <EntityTypeMapping TypeName="db_careerhuntModel.tbl_contact">
+              <MappingFragment StoreEntitySet="tbl_contact">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_jobseekers_profile">
+            <EntityTypeMapping TypeName="db_careerhuntModel.tbl_jobseekers_profile">
+              <MappingFragment StoreEntitySet="tbl_jobseekers_profile">
+                <ScalarProperty Name="IsProfileCreated" ColumnName="IsProfileCreated" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="SocialMedia" ColumnName="SocialMedia" />
+                <ScalarProperty Name="Skills" ColumnName="Skills" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_employer_profile">
+            <EntityTypeMapping TypeName="db_careerhuntModel.tbl_employer_profile">
+              <MappingFragment StoreEntitySet="tbl_employer_profile">
+                <ScalarProperty Name="CSocialMedia" ColumnName="CSocialMedia" />
+                <ScalarProperty Name="CImage" ColumnName="CImage" />
+                <ScalarProperty Name="CIndustry" ColumnName="CIndustry" />
+                <ScalarProperty Name="CEmail" ColumnName="CEmail" />
+                <ScalarProperty Name="CLocation" ColumnName="CLocation" />
+                <ScalarProperty Name="CBio" ColumnName="CBio" />
+                <ScalarProperty Name="CName" ColumnName="CName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_job_posts">
+            <EntityTypeMapping TypeName="db_careerhuntModel.tbl_job_posts">
+              <MappingFragment StoreEntitySet="tbl_job_posts">
+                <ScalarProperty Name="CMImage" ColumnName="CMImage" />
+                <ScalarProperty Name="CMLink" ColumnName="CMLink" />
+                <ScalarProperty Name="CMPay" ColumnName="CMPay" />
+                <ScalarProperty Name="CMMode" ColumnName="CMMode" />
+                <ScalarProperty Name="CMLocation" ColumnName="CMLocation" />
+                <ScalarProperty Name="CMName" ColumnName="CMName" />
+                <ScalarProperty Name="CMRole" ColumnName="CMRole" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_colleges_profile">
+            <EntityTypeMapping TypeName="db_careerhuntModel.tbl_colleges_profile">
+              <MappingFragment StoreEntitySet="tbl_colleges_profile">
+                <ScalarProperty Name="ColImage" ColumnName="ColImage" />
+                <ScalarProperty Name="ColURL" ColumnName="ColURL" />
+                <ScalarProperty Name="ColLocation" ColumnName="ColLocation" />
+                <ScalarProperty Name="ColAbout" ColumnName="ColAbout" />
+                <ScalarProperty Name="ColEmail" ColumnName="ColEmail" />
+                <ScalarProperty Name="ColName" ColumnName="ColName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_college_events">
+            <EntityTypeMapping TypeName="db_careerhuntModel.tbl_college_events">
+              <MappingFragment StoreEntitySet="tbl_college_events">
+                <ScalarProperty Name="ILink" ColumnName="ILink" />
+                <ScalarProperty Name="ITech" ColumnName="ITech" />
+                <ScalarProperty Name="IAbout" ColumnName="IAbout" />
+                <ScalarProperty Name="IWinner" ColumnName="IWinner" />
+                <ScalarProperty Name="IName" ColumnName="IName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_users">
+            <EntityTypeMapping TypeName="db_careerhuntModel.tbl_users">
+              <MappingFragment StoreEntitySet="tbl_users">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_userRole">
+            <EntityTypeMapping TypeName="db_careerhuntModel.tbl_userRole">
+              <MappingFragment StoreEntitySet="tbl_userRole">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

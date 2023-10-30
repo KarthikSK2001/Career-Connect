@@ -1,0 +1,54 @@
+﻿@model List<CareerConnect.Models.tbl_job_posts>
+@{
+    ViewBag.Title = "GetJobPostsData";
+}
+<style>
+    .card{
+        margin:1rem;
+    }
+    
+</style>
+@foreach (var item in Model)
+{
+    <div class="card text-center">
+        <div class="card-header" style="font-weight:bolder">
+            Profile Details
+        </div>
+        <div>
+            @{
+                var base64 = Convert.ToBase64String(item.CMImage);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                <img src="@imgsrc" style="max-width:100px;min-width:100px; border-radius:50%;margin-top:1rem" />
+            }
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@item.CMName</h5>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-danger" style="margin:0.5rem">@item.CMRole</button>
+                <button type="button" class="btn btn-warning" style="margin:0.5rem">@item.CMPay</button>
+                <button type="button" class="btn btn-secondary" style="margin:0.5rem">@item.CMLocation</button>
+                <button type="button" class="btn btn-success" style="margin:0.5rem">@item.CMMode</button>
+            </div><br />
+
+            <a href="@item.CMLink" target="_blank" class="btn btn-warning" style="margin:0.5rem">Apply Here</a>
+            @if (User.IsInRole("guest"))
+            {
+                
+            }
+            else
+            {
+
+                <a href="@Url.Action("JobPosts", new { @item.id, @item.CMName, @item.CMRole, @item.CMLocation, @item.CMMode,@item.CMPay,@item.CMLink})" class="btn btn-primary" style="margin:0.5rem">Edit Job</a>
+                <a href="@Url.Action("DeleteJob", new { @item.id })" class="btn btn-danger">Delete</a>
+            }
+        </div>
+
+
+      
+    </div>
+
+
+
+}
+

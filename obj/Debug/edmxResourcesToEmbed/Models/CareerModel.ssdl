@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_careerhuntModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_college_events">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IWinner" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IAbout" Type="varchar(max)" Nullable="false" />
+    <Property Name="ITech" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ILink" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_colleges_profile">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ColName" Type="varchar" MaxLength="50" />
+    <Property Name="ColEmail" Type="varchar" MaxLength="50" />
+    <Property Name="ColAbout" Type="varchar(max)" />
+    <Property Name="ColLocation" Type="varchar" MaxLength="50" />
+    <Property Name="ColURL" Type="varchar(max)" />
+    <Property Name="ColImage" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tbl_contact">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_employer_profile">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CBio" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CLocation" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CEmail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CIndustry" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CImage" Type="varbinary(max)" Nullable="false" />
+    <Property Name="CSocialMedia" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_job_posts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CMRole" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CMName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CMLocation" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CMMode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CMPay" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CMLink" Type="varchar(max)" Nullable="false" />
+    <Property Name="CMImage" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_jobseekers_profile">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Profession" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Bio" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Education" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Skills" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SocialMedia" Type="varchar(max)" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+    <Property Name="IsProfileCreated" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_userRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tbl_userRole_tbl_users">
+    <End Role="tbl_users" Type="Self.tbl_users" Multiplicity="1" />
+    <End Role="tbl_userRole" Type="Self.tbl_userRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tbl_userRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_careerhuntModelStoreContainer">
+    <EntitySet Name="tbl_college_events" EntityType="Self.tbl_college_events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_colleges_profile" EntityType="Self.tbl_colleges_profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_contact" EntityType="Self.tbl_contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_employer_profile" EntityType="Self.tbl_employer_profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_job_posts" EntityType="Self.tbl_job_posts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_jobseekers_profile" EntityType="Self.tbl_jobseekers_profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_userRole" EntityType="Self.tbl_userRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbl_userRole_tbl_users" Association="Self.FK_tbl_userRole_tbl_users">
+      <End Role="tbl_users" EntitySet="tbl_users" />
+      <End Role="tbl_userRole" EntitySet="tbl_userRole" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,84 @@
+﻿@model List<CareerConnect.Models.tbl_employer_profile>
+@{
+    ViewBag.Title = "GetEmployerProfileData";
+}
+
+
+@foreach (var item in Model)
+{
+    <div class="card text-center">
+        <div class="card-header" style="font-weight:bolder">
+            Profile Details
+        </div>
+        <div>
+            @{
+                var base64 = Convert.ToBase64String(item.CImage);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                <img src="@imgsrc" style="max-width:100px;min-width:100px; border-radius:50%;margin-top:1rem" />
+            }
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@item.CName</h5>
+            <p class="card-text">@item.CIndustry</p>
+            <a href="@item.CSocialMedia" target="_blank" class="btn btn-warning">Know More</a>
+            <a href="@Url.Action("EmployerProfile", new { @item.id, @item.CName, @item.CBio, @item.CLocation, @item.CEmail, @item.CIndustry, @item.CSocialMedia })" class="btn btn-primary">Edit Profile</a>
+        </div>
+        <center>
+            <p class="d-inline-flex gap-1" style="width:100%;padding:1rem">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="width:100%">
+                    About Yourself
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    @item.CBio
+                </div>
+            </div>
+        </center>
+        <center>
+            <p class="d-inline-flex gap-1" style="width:100%;padding:1rem">
+                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample" style="width:100%">
+                    Location
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample1">
+                <div class="card card-body">
+                    @item.CLocation
+                </div>
+            </div>
+        </center>
+        <center>
+            <p class="d-inline-flex gap-1" style="width:100%;padding:1rem">
+                <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample" style="width:100%">
+                    Email
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample2">
+                <div class="card card-body">
+                    @item.CEmail
+                </div>
+            </div>
+        </center>
+        <center>
+            <p class="d-inline-flex gap-1" style="width:100%;padding:1rem">
+                <a class="btn btn-warning" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample" style="width:100%">
+                    Industry
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample3">
+                <div class="card card-body">
+                    @item.CIndustry
+                </div>
+            </div>
+        </center>
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+}
+

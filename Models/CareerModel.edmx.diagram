@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="310fbbc61d964a3ea567144d37986f2d" Name="Diagram1">
+        <EntityTypeShape EntityType="db_careerhuntModel.tbl_contact" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_careerhuntModel.tbl_jobseekers_profile" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="db_careerhuntModel.tbl_employer_profile" Width="1.5" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="db_careerhuntModel.tbl_job_posts" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="db_careerhuntModel.tbl_colleges_profile" Width="1.5" PointX="9.75" PointY="1.625" />
+        <EntityTypeShape EntityType="db_careerhuntModel.tbl_college_events" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="db_careerhuntModel.tbl_users" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="db_careerhuntModel.tbl_userRole" Width="1.5" PointX="5.625" PointY="5.875" />
+        <AssociationConnector Association="db_careerhuntModel.FK_tbl_userRole_tbl_users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,95 @@
+﻿@model CareerConnect.Models.tbl_college_events
+@{
+    ViewBag.Title = "CollegeEvents";
+}
+
+<h2 style="text-align: center; color: darkcyan">College Events</h2>
+<style>
+    .error {
+        color: red;
+        font-weight: bolder;
+    }
+
+    .form-group {
+        margin: 1rem;
+    }
+
+    label {
+        margin: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        border: 2px solid lightblue;
+    }
+
+    #formtag {
+        border: 2px solid lightblue;
+        border-radius: 1rem
+    }
+</style>
+<div class="formtag">
+
+    @using (Html.BeginForm("AddCollegeEvents", "Home", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x=>x.id)
+            <label>Institation Name <span style="color:red;font-weight:bold">*</span></label>
+            @Html.TextBoxFor(x => x.IName, new { @class = "form-control", @placeholder = "NITK" })
+        </div>
+        <div class="form-group">
+            <label>About Event <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.IAbout, new { @class = "form-control", @placeholder = "About Event.." })
+        </div>
+        <div class="form-group">
+            <label>Tech Used <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.ITech, new { @class = "form-control", @placeholder = "ReactJS" })
+        </div>
+        <div class="form-group">
+            <label>Reward <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.IWinner, new { @class = "form-control", @placeholder = "Rs.10000" })
+        </div>
+        <div class="form-group">
+            <label>Link to Register <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.ILink, new { @class = "form-control", @placeholder = "URL..." })
+        </div>
+
+        
+
+     
+
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+    }
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("button[type='submit']").prop('disabled', true);
+
+        $("input[type='text']").on('input', function () {
+            var allFieldsFilled = true;
+            $("input[type='text']").each(function () {
+                if ($(this).val() === '') {
+                    allFieldsFilled = false;
+                    return false;
+                }
+            });
+
+
+            $("button[type='submit']").prop('disabled', !allFieldsFilled);
+        });
+    });
+</script>
+
+

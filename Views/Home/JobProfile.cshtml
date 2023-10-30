@@ -1,0 +1,116 @@
+﻿@model CareerConnect.Models.tbl_jobseekers_profile
+@{
+    ViewBag.Title = "JobProfile";
+}
+
+<h2 style="text-align: center; color: darkcyan">Job Seeker Profile</h2>
+<style>
+    .error {
+        color: red;
+        font-weight: bolder;
+    }
+
+    .form-group {
+        margin: 1rem;
+    }
+
+    label {
+        margin: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        border: 2px solid lightblue;
+    }
+
+    #formtag {
+        border: 2px solid lightblue;
+        border-radius: 1rem
+    }
+</style>
+<div class="formtag">
+
+    @using (Html.BeginForm("AddJobProfile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formtag" }))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x=>x.id)
+            <label>Name <span style="color:red;font-weight:bold">*</span></label>
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "John Doe" })
+        </div>
+        <div class="form-group">
+            <label>Profession <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.Profession, new { @class = "form-control", @placeholder = "Engineer" })
+        </div>
+        <div class="form-group">
+            <label>Bio <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.Bio, new { @class = "form-control", @placeholder = "John Doe" })
+        </div>
+        <div class="form-group">
+            <label>Location <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.Location, new { @class = "form-control", @placeholder = "Bangalore" })
+        </div>
+        <div class="form-group">
+            <label>Mobile <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", @placeholder = "+91 7899302090" })
+        </div>
+
+        <div class="form-group">
+            <label>Email <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "karthiksg2001@gmail.com" })
+        </div>
+
+        <div class="form-group">
+            <label>Education <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.Education, new { @class = "form-control", @placeholder = "Btech (CSE)" })
+        </div>
+        <div class="form-group">
+            <label>Skills <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.Skills, new { @class = "form-control", @placeholder = "HTML, CSS & JavaScript" })
+        </div>
+        <div class="form-group">
+            <label>Social Media <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.SocialMedia, new { @class = "form-control", @placeholder = "URL.." })
+        </div>
+        <div class="form-group">
+            <label>Image Upload <span style="color:red;font-weight:bold">*</span></label>
+
+            <input type="file" id="image1" name="image1" />
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+    }
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("button[type='submit']").prop('disabled', true);
+
+        $("input[type='text']").on('input', function () {
+            var allFieldsFilled = true;
+            $("input[type='text']").each(function () {
+                if ($(this).val() === '') {
+                    allFieldsFilled = false;
+                    return false;
+                }
+            });
+
+
+            $("button[type='submit']").prop('disabled', !allFieldsFilled);
+        });
+    });
+</script>

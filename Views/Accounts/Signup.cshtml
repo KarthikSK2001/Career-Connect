@@ -1,0 +1,83 @@
+﻿@model CareerConnect.Models.tbl_users
+
+@{
+    ViewBag.Title = "Signup";
+}
+
+<h2 style="text-align: center; color: darkcyan">Register Here</h2>
+<style>
+    .error {
+        color: red;
+        font-weight: bolder;
+    }
+
+    .form-group {
+        margin: 1rem;
+    }
+
+    label {
+        margin: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control, #Password {
+        border: 2px solid lightblue;
+    }
+
+    #formtag {
+        border: 2px solid lightblue;
+        border-radius: 1rem
+    }
+</style>
+
+@using (Html.BeginForm("Signup","Accounts",FormMethod.Post, new { @id = "formtag" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-group">
+    <div class="text-center">
+        <button type="button" class="btn btn-warning" style="font-weight:600">
+            Please be aware that after registration, you will not have access until it has been granted by an administrator.
+        </button>
+    </div>
+    <div class="text-center" style="margin:0.5rem">
+        <button type="button" class="btn btn-info" style="font-weight:600">
+            To access certain features, please log in as a guest.
+        </button>
+    </div>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label>Name <span style="color:red;font-weight:bold">*</span></label>
+
+        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "John Doe" } })
+        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+        <label>Email <span style="color:red;font-weight:bold">*</span></label>
+        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "johndoe@gmail.com" } })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+        <label>Password <span style="color:red;font-weight:bold">*</span></label>
+        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Type Here.." } })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+        <div class="btn-group">
+            <a href="/Accounts/Login" class="btn btn-warning">Login</a>
+        </div>
+    </div>
+</div>
+}
+
+

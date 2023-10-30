@@ -1,0 +1,46 @@
+﻿@model List<CareerConnect.Models.tbl_college_events>
+@{
+    ViewBag.Title = "GetCollegeEventsData";
+}
+<style>
+    .card {
+        margin: 1rem;
+    }
+</style>
+@foreach (var item in Model)
+{
+    <div class="card text-center">
+        <div class="card-header" style="font-weight:bolder">
+            Event Details
+        </div>
+        
+        <div class="card-body">
+            <h5 class="card-title">@item.IName</h5>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-danger" style="margin:0.5rem">@item.IAbout</button>
+
+            </div><br />
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-warning" style="margin:0.5rem">@item.ITech</button>
+                <button type="button" class="btn btn-secondary" style="margin:0.5rem">@item.IWinner</button>
+            </div><br />
+
+            <a href="@item.ILink" target="_blank" class="btn btn-warning" style="margin:0.5rem">Apply Here</a>
+            @if (User.IsInRole("guest"))
+            {
+
+            }
+            else
+            {
+                <a href="@Url.Action("CollegeEvents", new { @item.id, @item.IName, @item.IAbout, @item.ITech, @item.IWinner, @item.ILink })" class="btn btn-primary" style="margin:0.5rem">Edit Job</a>
+                <a href="@Url.Action("DeleteEvent", new { @item.id })" class="btn btn-danger">Delete</a>}
+            </div>
+
+
+
+    </div>
+
+
+
+}
+

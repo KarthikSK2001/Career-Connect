@@ -1,0 +1,97 @@
+﻿@model CareerConnect.Models.tbl_colleges_profile
+@{
+    ViewBag.Title = "CollegeProfile";
+}
+
+<h2 style="text-align: center; color: darkcyan">College Profile</h2>
+<style>
+    .error {
+        color: red;
+        font-weight: bolder;
+    }
+
+    .form-group {
+        margin: 1rem;
+    }
+
+    label {
+        margin: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        border: 2px solid lightblue;
+    }
+
+    #formtag {
+        border: 2px solid lightblue;
+        border-radius: 1rem
+    }
+</style>
+<div class="formtag">
+
+    @using (Html.BeginForm("AddCollegeProfile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formtag" }))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x=>x.id)
+            <label>College Name <span style="color:red;font-weight:bold">*</span></label>
+            @Html.TextBoxFor(x => x.ColName, new { @class = "form-control", @placeholder = "BMSCE" })
+        </div>
+        <div class="form-group">
+            <label>About <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.ColAbout, new { @class = "form-control", @placeholder = "About College" })
+        </div>
+        <div class="form-group">
+            <label>Email <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.ColEmail, new { @class = "form-control", @placeholder = "bmsce.ac.in" })
+        </div>
+        <div class="form-group">
+            <label>Location <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.ColLocation, new { @class = "form-control", @placeholder = "Bangalore" })
+        </div>
+        <div class="form-group">
+            <label>Social Media <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.ColURL, new { @class = "form-control", @placeholder = "URL..." })
+        </div>
+
+
+        <div class="form-group">
+            <label>Image Upload <span style="color:red;font-weight:bold">*</span></label>
+
+            <input type="file" id="image1" name="image1" />
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+    }
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("button[type='submit']").prop('disabled', true);
+
+        $("input[type='text']").on('input', function () {
+            var allFieldsFilled = true;
+            $("input[type='text']").each(function () {
+                if ($(this).val() === '') {
+                    allFieldsFilled = false;
+                    return false;
+                }
+            });
+
+
+            $("button[type='submit']").prop('disabled', !allFieldsFilled);
+        });
+    });
+</script>
+

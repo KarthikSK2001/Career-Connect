@@ -1,0 +1,27 @@
+﻿@model List<CareerConnect.Models.tbl_contact>
+@{
+    ViewBag.Title = "GetContactsList";
+}
+
+<h2 style="text-align: center; color: darkcyan">Contact Responses</h2>
+
+<table class="table table-hover" style="border:2px solid lightblue;">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Message</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.Name</td>
+    <td>@item.Email</td>
+    <td>@item.Mobile</td>
+    <td>@item.Message</td>
+    <td> <a href="@Url.Action("DeleteContact", new { @item.id})" class="btn btn-danger">Delete</a> </td>
+</tr>
+    }
+
+</table>

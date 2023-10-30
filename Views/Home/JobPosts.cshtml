@@ -1,0 +1,102 @@
+﻿@model CareerConnect.Models.tbl_job_posts
+@{
+    ViewBag.Title = "JobPosts";
+}
+
+<h2 style="text-align: center; color: darkcyan">Jobs Posts</h2>
+<style>
+    .error {
+        color: red;
+        font-weight: bolder;
+    }
+
+    .form-group {
+        margin: 1rem;
+    }
+
+    label {
+        margin: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        border: 2px solid lightblue;
+    }
+
+    #formtag {
+        border: 2px solid lightblue;
+        border-radius: 1rem
+    }
+</style>
+<div class="formtag">
+
+    @using (Html.BeginForm("AddJobPosts", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formtag" }))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x => x.id)
+            <label>Company Name <span style="color:red;font-weight:bold">*</span></label>
+            @Html.TextBoxFor(x => x.CMName, new { @class = "form-control", @placeholder = "Caterpillar Inc." })
+        </div>
+        <div class="form-group">
+            <label>Location of Work <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.CMLocation, new { @class = "form-control", @placeholder = "Bangalore" })
+        </div>
+        <div class="form-group">
+            <label>Role <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.CMRole, new { @class = "form-control", @placeholder = "Software Development Engineer" })
+        </div>
+        <div class="form-group">
+            <label>Mode of Work <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.CMMode, new { @class = "form-control", @placeholder = "Online / Offline" })
+        </div>
+        <div class="form-group">
+            <label>CTC <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.CMPay, new { @class = "form-control", @placeholder = "10 LPA" })
+        </div>
+
+        <div class="form-group">
+            <label>Job Link <span style="color:red;font-weight:bold">*</span></label>
+
+            @Html.TextBoxFor(x => x.CMLink, new { @class = "form-control", @placeholder = "URL..." })
+        </div>
+
+        <div class="form-group">
+            <label>Image Upload <span style="color:red;font-weight:bold">*</span></label>
+
+            <input type="file" id="image1" name="image1" />
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+    }
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("button[type='submit']").prop('disabled', true);
+
+        $("input[type='text']").on('input', function () {
+            var allFieldsFilled = true;
+            $("input[type='text']").each(function () {
+                if ($(this).val() === '') {
+                    allFieldsFilled = false;
+                    return false;
+                }
+            });
+
+
+            $("button[type='submit']").prop('disabled', !allFieldsFilled);
+        });
+    });
+</script>
+

@@ -1,0 +1,73 @@
+﻿@model List<CareerConnect.Models.tbl_colleges_profile>
+@{
+    ViewBag.Title = "GetCollegeProfileData";
+}
+
+
+
+@foreach (var item in Model)
+{
+    <div class="card text-center">
+        <div class="card-header" style="font-weight:bolder">
+            Profile Details
+        </div>
+        <div>
+            @{
+                var base64 = Convert.ToBase64String(item.ColImage);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                <img src="@imgsrc" style="max-width:100px;min-width:100px; border-radius:50%;margin-top:1rem" />
+            }
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@item.ColName</h5>
+            <a href="@item.ColURL" target="_blank" class="btn btn-warning">Know More</a>
+            <a href="@Url.Action("CollegeProfile", new { @item.id, @item.ColName, @item.ColAbout, @item.ColLocation, @item.ColEmail, @item.ColURL })" class="btn btn-primary">Edit Profile</a>
+        </div>
+        <center>
+            <p class="d-inline-flex gap-1" style="width:100%;padding:1rem">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="width:100%">
+                    Email
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    @item.ColEmail
+                </div>
+            </div>
+        </center>
+        <center>
+            <p class="d-inline-flex gap-1" style="width:100%;padding:1rem">
+                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample" style="width:100%">
+                    Location
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample1">
+                <div class="card card-body">
+                    @item.ColLocation
+                </div>
+            </div>
+        </center>
+        
+        <center>
+            <p class="d-inline-flex gap-1" style="width:100%;padding:1rem">
+                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample" style="width:100%">
+                    About College
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample1">
+                <div class="card card-body">
+                    @item.ColAbout
+                </div>
+            </div>
+        </center>
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+}
+
